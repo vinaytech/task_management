@@ -1,0 +1,52 @@
+<%= form_with(model: order) do |form| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+        <% order.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if order.user_id %>
+  <div class="field">
+    <%= order.user.phone_number %>
+  </div>
+  <% else %>
+  <div class="field">
+    <%= form.label :user_identity, "Customer Phone Number" %>
+    <%= form.text_field :user_identity %>
+  </div>
+  <% end %>
+<div class="field">
+  <%= form.collection_check_boxes(:store_item_ids, StoreItem.all, :id, :item_details) do |b| %>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <div class="input-group-text">
+      <%= b.check_box %>
+    </div>
+  </div>
+  <%= b.label class: 'form-control text-center text-uppercase' %>
+  </div>       <%#= check_box_tag("items[]", item.id) %>
+<% end %>
+
+
+</div>
+
+  <div class="field">
+    <%= form.label :delivered_time, "Delivered time" %>
+    <%= form.datetime_field :delivered_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :order_status, "Order Status" %>
+    <%= form.select :order_status, ["Pending", "In Progress", "Done"] %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

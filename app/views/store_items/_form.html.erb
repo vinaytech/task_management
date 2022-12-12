@@ -1,0 +1,47 @@
+<%= form_with(model: store_item) do |form| %>
+  <% if store_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(store_item.errors.count, "error") %> prohibited this store_item from being saved:</h2>
+
+      <ul>
+        <% store_item.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :item_category_id %>
+    <%= form.collection_select :item_category_id, ItemCategory.all, :id, :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tax_id %>
+    <%= form.collection_select :tax_id, Tax.all, :id, :percentage %>
+  </div>
+
+
+  <div class="field">
+    <%= form.label :discount_id, "Discount Rule" %>
+    <%= form.select :discount_id, Discount.all.map{|s|[s.discount_name, s.id]} %>
+  </div>
+
+
+
+ <div class="actions">
+    <%= form.submit %>
+  </div>
+
+ 
+<% end %>

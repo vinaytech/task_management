@@ -1,0 +1,62 @@
+<%= form_with(model: discount) do |form| %>
+  <% if discount.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(discount.errors.count, "error") %> prohibited this discount from being saved:</h2>
+
+      <ul>
+        <% discount.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :discount_name %>
+    <%= form.text_field :discount_name %>
+  </div>
+  <div class="field">
+    <%= form.label :discount_type %>
+    <%= form.select :discount_type_id, DiscountType.all.map{|s|[s.name, s.id]} %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_bogo_free, "Buy X get free" %>
+    <%= form.check_box :is_bogo_free %>
+  </div>
+
+  
+
+<div>
+    <% StoreItem.all.each do |item| %>
+        <%= check_box_tag "discount[bogo_store_item_ids][]", item.id, discount.bogo_store_item_ids&.include?(item.id.to_s), id: "discount_bogo_store_item_ids_#{item.id}" %>
+        <%= item.name %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fixed_discount %>
+    <%= form.text_field :amount %>
+  </div>
+
+
+
+  
+
+
+  <div class="field">
+    <%= form.label :percentage %>
+    <%= form.text_field :percentage %>
+  </div>
+
+
+  
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.check_box :status %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

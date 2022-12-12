@@ -43,7 +43,7 @@
   <body>
 
   <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="#">TM</a>
+  <a class="navbar-brand" href="#">STORE</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -51,24 +51,31 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-         <%= link_to "Tasks <span class='sr-only'>(current)</span>".html_safe, tasks_path, class: "nav-link" %>
+         <%= link_to "Store <span class='sr-only'>(current)</span>".html_safe, store_items_path, class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%= link_to 'New Task', new_task_path, class: "nav-link" %>
+         <%= link_to "Discount <span class='sr-only'>(current)</span>".html_safe, discounts_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+         <%= link_to "Category <span class='sr-only'>(current)</span>".html_safe, item_categories_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+         <%= link_to "Tax <span class='sr-only'>(current)</span>".html_safe, taxes_path, class: "nav-link" %>
+      </li>
+
+      <li class="nav-item">
+        <%= link_to 'New Order', orders_path, class: "nav-link" %>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">Task Filter</a>
+        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">Order Filter</a>
         <div class="dropdown-menu">
-          <%= link_to "Pending", tasks_path(:status => 'pending'), class: "dropdown-item" %>
-          <%= link_to "Assigned", tasks_path(:status => 'assigned'), class: "dropdown-item" %>
-          <%= link_to "In Progress".html_safe, tasks_path(:status => 'in_progress'), class: "dropdown-item" %>
+          <%= link_to "Pending".html_safe, orders_path(:status => 'pending'), class: "dropdown-item" %>
+          <%= link_to "In Progress".html_safe, orders_path(:status => 'in_progress'), class: "dropdown-item" %>
+          <%= link_to "Done".html_safe, orders_path(:status => 'in_progress'), class: "dropdown-item" %>
         </div>
       </li>
     </ul>
-    <%= form_tag(tasks_path , :method => :get ,:class => "form-inline my-2 my-lg-0")do %>
-      <input class="form-control mr-sm-2" type="text" name="query" placeholder="Search By Title" aria-label="Search">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-    <% end %>
+   
   </div>
 </nav>
 
